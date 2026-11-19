@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en" data-title-ko="FridaySnack — 한입 크기 앱 스튜디오">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FridaySnack — snack-sized apps</title>
+<script src="/assets/site.js"></script>
+<meta name="description" content="FridaySnack is a one-person studio shipping small, playful, snack-sized apps on a regular basis. First up: Mocoder, a motion synthesizer for iPhone.">
+<link rel="canonical" href="https://fridaysnack.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="FridaySnack">
+<meta property="og:title" content="FridaySnack — snack-sized apps">
+<meta property="og:description" content="A one-person studio shipping small, playful apps regularly. First up: Mocoder, a motion synthesizer for iPhone.">
+<meta property="og:url" content="https://fridaysnack.com/">
+<meta property="og:image" content="https://fridaysnack.com/assets/og-fridaysnack.png">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="ko_KR">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#fff8ec" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1a1411" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;600;700&amp;family=Jua&amp;display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<a class="skip-link" href="#main"><span class="l-en" lang="en">Skip to content</span><span class="l-ko" lang="ko">본문 바로가기</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="wordmark" href="/" aria-label="FridaySnack home">
+      <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><defs><mask id="bite-h"><rect width="64" height="64" fill="#fff"/><circle cx="57" cy="9" r="12" fill="#000"/><circle cx="63" cy="24" r="7" fill="#000"/></mask></defs><g mask="url(#bite-h)"><circle cx="32" cy="32" r="27" fill="#f5b82e" stroke="currentColor" stroke-width="4"/><circle cx="22" cy="24" r="3.5" fill="currentColor"/><circle cx="36" cy="40" r="3.5" fill="currentColor"/><circle cx="24" cy="44" r="2.5" fill="currentColor"/><circle cx="40" cy="26" r="2.5" fill="currentColor"/></g></svg>
+      <span>Friday<span class="snack">Snack</span></span>
+    </a>
+    <nav class="site-nav" aria-label="Main">
+      <a href="#apps"><span class="l-en" lang="en">Apps</span><span class="l-ko" lang="ko">앱</span></a>
+      <a href="#contact"><span class="l-en" lang="en">Contact</span><span class="l-ko" lang="ko">문의</span></a>
+      <button class="lang-toggle" type="button" hidden>한국어</button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero">
+    <div class="wrap">
+      <h1>
+        <span class="l-en" lang="en">Small apps, served <span class="squiggle">fresh</span>.</span>
+        <span class="l-ko" lang="ko">작고 재밌는 앱을, <span class="squiggle">간식처럼</span>.</span>
+      </h1>
+      <p class="lede l-en" lang="en">FridaySnack is a one-person studio making snack-sized apps: small, playful, and done in a bite. A new one lands every couple of weeks or so.</p>
+      <p class="lede l-ko" lang="ko">FridaySnack은 혼자 꾸리는 작은 스튜디오입니다. 한입에 즐길 수 있는 가볍고 재밌는 앱과 서비스를 2주에 하나쯤 꾸준히 내놓습니다.</p>
+      <ul class="rules">
+        <li>
+          <strong><span class="l-en" lang="en">One idea per app</span><span class="l-ko" lang="ko">앱 하나에 아이디어 하나</span></strong>
+          <span class="l-en" lang="en">No bloat. Open it, play, smile.</span><span class="l-ko" lang="ko">군더더기 없이. 열고, 놀고, 웃고.</span>
+        </li>
+        <li>
+          <strong><span class="l-en" lang="en">Private by default</span><span class="l-ko" lang="ko">기본은 개인정보 보호</span></strong>
+          <span class="l-en" lang="en">No ads, no accounts, no tracking unless an app truly needs it.</span><span class="l-ko" lang="ko">꼭 필요하지 않다면 광고, 계정, 추적은 없습니다.</span>
+        </li>
+        <li>
+          <strong><span class="l-en" lang="en">Fresh batches</span><span class="l-ko" lang="ko">자주 굽기</span></strong>
+          <span class="l-en" lang="en">Shipped often, improved as we go.</span><span class="l-ko" lang="ko">자주 내놓고, 쓰면서 다듬습니다.</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="apps" aria-labelledby="apps-title">
+    <div class="wrap">
+      <span class="eyebrow"><span class="l-en" lang="en">The menu</span><span class="l-ko" lang="ko">메뉴판</span></span>
+      <h2 id="apps-title"><span class="l-en" lang="en">Apps</span><span class="l-ko" lang="ko">앱</span></h2>
+      <ul class="app-grid">
+        <!-- One <li class="app-card"> per app. Copy this block to add a new one (see README). -->
+        <li class="app-card">
+          <img src="/mocoder/icon-256.png" width="72" height="72" alt="">
+          <h3><a href="/mocoder/">Mocoder</a></h3>
+          <p class="l-en" lang="en">Move your phone to make music. A theremin-style motion synth for iPhone.</p>
+          <p class="l-ko" lang="ko">폰을 움직여 연주하는 모션 악기. 테레민처럼 공중에서 연주하는 iPhone 신디사이저.</p>
+          <div class="meta">
+            <span class="pill"><span class="l-en" lang="en">Coming soon</span><span class="l-ko" lang="ko">출시 예정</span></span>
+            <span class="tag">iPhone</span>
+            <span class="tag"><span class="l-en" lang="en">Free</span><span class="l-ko" lang="ko">무료</span></span>
+          </div>
+        </li>
+        <li class="app-card app-card--next">
+          <div class="oven" aria-hidden="true">🍪</div>
+          <h3><span class="l-en" lang="en">Next snack</span><span class="l-ko" lang="ko">다음 간식</span></h3>
+          <p class="l-en" lang="en">Something new is in the oven.</p>
+          <p class="l-ko" lang="ko">새로운 앱이 오븐에서 굽히는 중입니다.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="contact" aria-labelledby="contact-title">
+    <div class="wrap">
+      <div class="contact-box">
+        <h2 id="contact-title"><span class="l-en" lang="en">Say hello</span><span class="l-ko" lang="ko">연락하기</span></h2>
+        <p class="l-en" lang="en">Questions, ideas, bug reports, or snack recommendations are all welcome.</p>
+        <p class="l-ko" lang="ko">질문, 아이디어, 버그 제보, 간식 추천까지 무엇이든 환영합니다.</p>
+        <a href="mailto:hello@fridaysnack.com">hello@fridaysnack.com</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>© 2026 FridaySnack</p>
+    <ul>
+      <li><a href="/mocoder/">Mocoder</a></li>
+      <li><a href="mailto:hello@fridaysnack.com">hello@fridaysnack.com</a></li>
+    </ul>
+  </div>
+</footer>
+</body>
+</html>
