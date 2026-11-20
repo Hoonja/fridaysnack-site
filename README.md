@@ -1,4 +1,4 @@
-# fridaysnack.com
+# FridaySnack site (fridaysnack.vercel.app)
 
 Static site for **FridaySnack**, a one-person studio shipping snack-sized apps.
 Plain HTML + one CSS file + a few small vanilla JS files. No build step, no npm, no frameworks.
@@ -127,7 +127,7 @@ npx vercel          # first run links/creates the project, deploys a preview
 npx vercel --prod   # production deploy
 ```
 
-### Custom domain: fridaysnack.com
+### Custom domain (later): fridaysnack.com
 
 1. Vercel project → **Settings → Domains** → add `fridaysnack.com` and
    `www.fridaysnack.com` (set one to redirect to the other; apex is the canonical URL used in the site).
@@ -143,8 +143,8 @@ npx vercel --prod   # production deploy
    records when changing DNS.
 
 After deploy, check that these URLs return 200 before submitting to App Review:
-- https://fridaysnack.com/mocoder/privacy/
-- https://fridaysnack.com/mocoder/support/
+- https://fridaysnack.vercel.app/mocoder/privacy/
+- https://fridaysnack.vercel.app/mocoder/support/
 
 ## Rules
 
