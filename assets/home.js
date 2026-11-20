@@ -79,7 +79,6 @@
     var NS = 'http://www.w3.org/2000/svg';
     var holes = btn.querySelector('.bite-holes');
     var rims = btn.querySelector('.bite-rims');
-    var counters = document.querySelectorAll('[data-bites]');
     var countBox = document.getElementById('bite-count');
 
     // [angle (deg, 0 = right, clockwise), distance from centre, radius] in the
@@ -91,13 +90,18 @@
     var bites = 1;
     var busy = false;
 
+    var taps = 0; // how many times this visitor has bitten (just a toy, nothing is stored)
+    function label(en, ko) {
+      if (!countBox) return;
+      countBox.querySelector('.l-en').innerHTML = en;
+      countBox.querySelector('.l-ko').innerHTML = ko;
+    }
     function setCount(n, fresh) {
-      for (var i = 0; i < counters.length; i++) counters[i].textContent = n;
-      if (fresh && countBox) {
-        countBox.querySelector('.l-en').innerHTML = 'Fresh cookie! bites: <b data-bites>0</b>';
-        countBox.querySelector('.l-ko').innerHTML = '새로 구웠어요! 먹은 횟수: <b data-bites>0</b>';
-        counters = document.querySelectorAll('[data-bites]');
+      if (fresh) {
+        label('Fresh batch! Tap again 🍪', '새로 구웠어요! 또 먹어 봐요 🍪');
+        return;
       }
+      label('Nom nom ×<b>' + taps + '</b>', '냠냠 ×<b>' + taps + '</b>');
     }
     function circle(parent, cx, cy, r) {
       var c = document.createElementNS(NS, 'circle');
@@ -159,6 +163,7 @@
       if (bites - 1 < BITES.length) {
         var pt = addBite(BITES[bites - 1]);
         bites++;
+        taps++;
         setCount(bites);
         bump('is-chomp');
         crumbs(pt);
