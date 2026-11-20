@@ -1,5 +1,7 @@
-// FridaySnack — tiny site script. Loaded in <head> (not deferred) so the
-// language is set before first paint. Without JS, pages show both languages.
+// FridaySnack — tiny shared site script. Loaded in <head> (not deferred) so
+// the language is set before first paint. Without JS, pages show both
+// languages. Page toys live in deferred scripts: /assets/home.js (home) and
+// /mocoder/demo.js (Mocoder page).
 
 // ---- App Store links -------------------------------------------------------
 // Put the real App Store URL here once the app is live. While a value is '',
@@ -12,6 +14,7 @@ var APP_STORE_URLS = {
 (function () {
   var KEY = 'fs-lang';
   var root = document.documentElement;
+  root.classList.add('js'); // lets CSS show JS-only bits (bite counter, timer)
 
   function readSaved() {
     try { return window.localStorage.getItem(KEY); } catch (e) { return null; }

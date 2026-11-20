@@ -1,7 +1,7 @@
 # fridaysnack.com
 
 Static site for **FridaySnack**, a one-person studio shipping snack-sized apps.
-Plain HTML + one CSS file + one small JS file. No build step, no npm, no frameworks.
+Plain HTML + one CSS file + a few small vanilla JS files. No build step, no npm, no frameworks.
 
 ## Structure
 
@@ -14,12 +14,14 @@ Plain HTML + one CSS file + one small JS file. No build step, no npm, no framewo
 ├── sitemap.xml
 ├── vercel.json                 cleanUrls + trailingSlash + security headers
 ├── assets/
-│   ├── site.css                The only stylesheet (light/dark tokens on :root)
-│   ├── site.js                 KO/EN toggle + App Store URL constants
+│   ├── site.css                The only stylesheet (light/dark tokens on :root, sticker look)
+│   ├── site.js                 KO/EN toggle + App Store URL constants (every page, in <head>)
+│   ├── home.js                 Home toys: bite-able cookie, snack parallax, card wave, oven timer (defer)
 │   ├── apple-touch-icon.png    Brand mark, 180x180
 │   └── og-fridaysnack.png      Open Graph image for the home page (1200x630)
 └── mocoder/
     ├── index.html              App page            -> /mocoder/
+    ├── demo.js                 "Try it" mini theremin (Web Audio + canvas, defer)
     ├── privacy/index.html      Privacy policy      -> /mocoder/privacy/  (URL given to Apple)
     ├── support/index.html      Support + FAQ       -> /mocoder/support/  (URL given to Apple)
     ├── icon-512.png            App icon (hero, og:image)
@@ -89,6 +91,18 @@ When the app is live, also:
 
 App-specific colors (like the Mocoder hero) go in `assets/site.css` as a new
 block; reuse the shared tokens for everything else.
+
+## Motion and toys
+
+- Each page runs at most one `requestAnimationFrame` loop (`home.js`, `mocoder/demo.js`).
+  It stops when its elements are off screen (IntersectionObserver) or the tab is hidden.
+  Blocks with `data-anim` get `.is-paused` while off screen, which pauses their CSS animations.
+- `prefers-reduced-motion: reduce` turns off drifting, marquee and idle animation;
+  clicks, taps and the demo still work.
+- `site.js` adds `.js` to `<html>`. Elements with `.js-only` (bite counter, oven timer)
+  are hidden without JS; the page still reads fully without it.
+- The demo creates its `AudioContext` only on a press or key press, keeps one sine
+  oscillator running and gates it with a gain ramp (30 ms in, 80 ms out).
 
 ## Preview locally
 

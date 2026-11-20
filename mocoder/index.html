@@ -23,6 +23,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;600;700&amp;family=Jua&amp;display=swap">
 <link rel="stylesheet" href="/assets/site.css">
+<script src="/mocoder/demo.js" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main"><span class="l-en" lang="en">Skip to content</span><span class="l-ko" lang="ko">본문 바로가기</span></a>
@@ -45,7 +46,7 @@
   <div class="wrap">
     <p class="breadcrumb"><a href="/">FridaySnack</a> / Mocoder</p>
 
-    <section class="app-hero" aria-labelledby="app-title">
+    <section class="app-hero sticker" aria-labelledby="app-title">
       <img class="app-icon" src="/mocoder/icon-512.png" width="180" height="180" alt="Mocoder app icon">
       <div>
         <h1 id="app-title">Mocoder</h1>
@@ -53,11 +54,50 @@
         <p class="l-en" lang="en">Hold the screen and tilt or raise your phone to bend the pitch. Play in mid-air like a theremin, and watch your sound come alive in six visual themes.</p>
         <p class="l-ko" lang="ko">화면을 누르고 폰을 기울이거나 들어 올리면 음이 따라 움직입니다. 테레민처럼 공중에서 연주하고, 여섯 가지 화면 테마로 소리를 눈으로도 즐겨 보세요.</p>
         <!-- App Store button: coming-soon state. Set APP_STORE_URLS.mocoder in /assets/site.js to turn it into a real link. -->
-        <span class="store-btn store-btn--soon" data-appstore="mocoder">
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-          <span class="l-en" lang="en">Coming soon to the App Store</span><span class="l-ko" lang="ko">App Store 출시 예정</span>
-        </span>
+        <div class="btn-row">
+          <span class="store-btn store-btn--soon" data-appstore="mocoder">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <span class="l-en" lang="en">Coming soon to the App Store</span><span class="l-ko" lang="ko">App Store 출시 예정</span>
+          </span>
+          <a class="demo-jump" href="#try"><span class="l-en" lang="en">Try it in your browser ↓</span><span class="l-ko" lang="ko">브라우저에서 해 보기 ↓</span></a>
+        </div>
         <p class="facts"><span class="l-en" lang="en">Free · iPhone · iOS 16.4 or later · No ads, no accounts</span><span class="l-ko" lang="ko">무료 · iPhone · iOS 16.4 이상 · 광고·계정 없음</span></p>
+      </div>
+    </section>
+
+    <section class="section" id="try" aria-labelledby="try-title">
+      <span class="eyebrow"><span class="l-en" lang="en">Try it here</span><span class="l-ko" lang="ko">여기서 해 보기</span></span>
+      <h2 id="try-title"><span class="l-en" lang="en">Play a tiny theremin</span><span class="l-ko" lang="ko">미니 테레민 연주하기</span></h2>
+      <p class="lede l-en" lang="en">A pocket-sized taste of Mocoder, right in your browser. The real app follows how you move your phone.</p>
+      <p class="lede l-ko" lang="ko">브라우저에서 맛보는 한입 크기 Mocoder. 실제 앱은 폰의 움직임을 따라 연주합니다.</p>
+      <div class="demo sticker">
+        <div class="demo-pad" id="demo-pad" tabindex="0" role="slider" aria-orientation="vertical"
+             aria-valuemin="220" aria-valuemax="880" aria-valuenow="440" aria-valuetext="A4, 440 Hz"
+             aria-label="Theremin pad / 테레민 패드" aria-describedby="demo-keys">
+          <canvas aria-hidden="true"></canvas>
+          <div class="readout" id="demo-readout" aria-hidden="true">
+            <div class="note" id="demo-note">A4</div>
+            <div class="hz" id="demo-hz">440.0 Hz</div>
+            <div class="meter">
+              <svg viewBox="0 0 120 32" focusable="false">
+                <path d="M14 30a50 50 0 0 1 92 0" fill="none" stroke="rgba(201,196,255,.35)" stroke-width="3" stroke-linecap="round"/>
+                <path d="M51 10.6a50 50 0 0 1 18 0" fill="none" stroke="#4ade80" stroke-width="4" stroke-linecap="round"/>
+                <line class="needle" id="demo-needle" x1="60" y1="30" x2="60" y2="15" stroke="#86efac" stroke-width="3" stroke-linecap="round"/>
+                <circle cx="60" cy="30" r="3.5" fill="#f2f0ff"/>
+              </svg>
+              <div class="cents" id="demo-cents">0¢</div>
+            </div>
+          </div>
+          <p class="pad-label" aria-hidden="true"><span class="l-en" lang="en">Press &amp; hold here</span><span class="l-ko" lang="ko">여기를 누르고 있어 보세요</span></p>
+        </div>
+        <div class="demo-controls">
+          <button class="chip-btn" type="button" id="tilt-btn" aria-pressed="false" hidden><span class="l-en" lang="en">Use tilt</span><span class="l-ko" lang="ko">기울기로 연주</span></button>
+          <p class="demo-hint"><strong><span class="l-en" lang="en">Sound on.</span><span class="l-ko" lang="ko">소리를 켜 주세요.</span></strong> <span class="l-en" lang="en">Hold to play. Slide up or down to bend the pitch, sideways to fine-tune.</span><span class="l-ko" lang="ko">누르고 있으면 소리가 나요. 위아래로 밀면 음이 바뀌고, 옆으로 밀면 미세 조정돼요.</span></p>
+        </div>
+        <p class="demo-status" id="demo-status" role="status"></p>
+        <p class="demo-keys" id="demo-keys"><span class="l-en" lang="en">Keyboard: focus the pad, hold <kbd>Space</kbd> to play, <kbd>↑</kbd> <kbd>↓</kbd> move a semitone, <kbd>←</kbd> <kbd>→</kbd> fine-tune.</span><span class="l-ko" lang="ko">키보드: 패드를 선택하고 <kbd>Space</kbd>를 누르고 있으면 연주, <kbd>↑</kbd> <kbd>↓</kbd> 반음 이동, <kbd>←</kbd> <kbd>→</kbd> 미세 조정.</span></p>
+        <p class="demo-tip"><span class="l-en" lang="en">iPhone tip: no sound? Turn off Silent mode (the side switch or Action button) and turn the volume up.</span><span class="l-ko" lang="ko">iPhone 팁: 소리가 안 나면 무음 모드(옆 스위치나 동작 버튼)를 끄고 볼륨을 올려 주세요.</span></p>
+        <noscript><p class="demo-nojs">The demo needs JavaScript. / 체험판은 JavaScript가 필요합니다.</p></noscript>
       </div>
     </section>
 
@@ -65,9 +105,9 @@
       <span class="eyebrow"><span class="l-en" lang="en">How it plays</span><span class="l-ko" lang="ko">연주 방법</span></span>
       <h2 id="how-title"><span class="l-en" lang="en">Like a theremin, in your pocket</span><span class="l-ko" lang="ko">주머니 속 테레민</span></h2>
       <ol class="steps">
-        <li><span class="l-en" lang="en">Press and hold anywhere on the screen to play a tone. Let go to stop.</span><span class="l-ko" lang="ko">화면 아무 곳이나 누르고 있으면 소리가 나고, 손을 떼면 멈춥니다.</span></li>
-        <li><span class="l-en" lang="en">Keep holding and move the phone. The pitch glides smoothly, with no steps.</span><span class="l-ko" lang="ko">누른 채로 폰을 움직이면 음높이가 끊김 없이 부드럽게 변합니다.</span></li>
-        <li><span class="l-en" lang="en">Watch the readout to land on a note, and feel a light tick when you hit it.</span><span class="l-ko" lang="ko">화면 위 표시를 보며 음을 맞추고, 정확히 맞으면 가벼운 진동으로 느껴 보세요.</span></li>
+        <li class="sticker"><span class="l-en" lang="en">Press and hold anywhere on the screen to play a tone. Let go to stop.</span><span class="l-ko" lang="ko">화면 아무 곳이나 누르고 있으면 소리가 나고, 손을 떼면 멈춥니다.</span></li>
+        <li class="sticker"><span class="l-en" lang="en">Keep holding and move the phone. The pitch glides smoothly, with no steps.</span><span class="l-ko" lang="ko">누른 채로 폰을 움직이면 음높이가 끊김 없이 부드럽게 변합니다.</span></li>
+        <li class="sticker"><span class="l-en" lang="en">Watch the readout to land on a note, and feel a light tick when you hit it.</span><span class="l-ko" lang="ko">화면 위 표시를 보며 음을 맞추고, 정확히 맞으면 가벼운 진동으로 느껴 보세요.</span></li>
       </ol>
     </section>
 
@@ -75,12 +115,12 @@
       <span class="eyebrow"><span class="l-en" lang="en">Two ways to play</span><span class="l-ko" lang="ko">두 가지 연주 방식</span></span>
       <h2 id="modes-title"><span class="l-en" lang="en">Tilt it or lift it</span><span class="l-ko" lang="ko">기울이거나, 들어 올리거나</span></h2>
       <div class="cards">
-        <article class="card">
+        <article class="card card--sky sticker sticker--poke">
           <h3><span class="l-en" lang="en">Tilt mode</span><span class="l-ko" lang="ko">기울기 모드</span></h3>
           <p class="l-en" lang="en">Tilt the phone up or down to raise or lower the pitch. Uses the motion sensors, works anywhere.</p>
           <p class="l-ko" lang="ko">폰을 위아래로 기울이면 음이 올라가고 내려갑니다. 모션 센서를 사용하며 어디서나 동작합니다.</p>
         </article>
-        <article class="card">
+        <article class="card card--grape sticker sticker--poke">
           <h3><span class="l-en" lang="en">Height mode</span><span class="l-ko" lang="ko">높이 모드</span></h3>
           <p class="l-en" lang="en">ARKit uses the camera to track how high you are actually holding the phone. Lift it to go up, lower it to go down. Works best in good light.</p>
           <p class="l-ko" lang="ko">ARKit 카메라로 폰의 실제 높이를 측정합니다. 폰을 들어 올리면 음이 높아지고, 내리면 낮아집니다. 밝은 곳에서 가장 잘 동작합니다.</p>
@@ -91,19 +131,19 @@
     <section class="section" aria-labelledby="themes-title">
       <span class="eyebrow"><span class="l-en" lang="en">Six themes</span><span class="l-ko" lang="ko">여섯 가지 테마</span></span>
       <h2 id="themes-title"><span class="l-en" lang="en">See your sound</span><span class="l-ko" lang="ko">소리를 눈으로</span></h2>
-      <ul class="themes">
-        <li><div class="swatch sw-wave" aria-hidden="true"></div><span class="l-en" lang="en">Waveform — five layered waves</span><span class="l-ko" lang="ko">기본 파형 — 다섯 겹의 파형</span></li>
-        <li><div class="swatch sw-trail" aria-hidden="true"></div><span class="l-en" lang="en">Aurora Trail — your melody leaves a glow</span><span class="l-ko" lang="ko">오로라 잔상 — 음의 궤적이 빛으로 남아요</span></li>
-        <li><div class="swatch sw-nebula" aria-hidden="true"></div><span class="l-en" lang="en">Nebula — a full-screen nebula</span><span class="l-ko" lang="ko">네뷸라 — 화면 가득한 성운</span></li>
-        <li><div class="swatch sw-kaleido" aria-hidden="true"></div><span class="l-en" lang="en">Kaleidoscope — full-screen patterns</span><span class="l-ko" lang="ko">만화경 — 화면 가득한 무늬</span></li>
-        <li><div class="swatch sw-warp" aria-hidden="true"></div><span class="l-en" lang="en">Warp Tunnel — fly through the sound</span><span class="l-ko" lang="ko">워프 터널 — 소리 속으로 질주</span></li>
-        <li><div class="swatch sw-curtain" aria-hidden="true"></div><span class="l-en" lang="en">Aurora Curtain — light across the sky</span><span class="l-ko" lang="ko">오로라 커튼 — 하늘에 드리운 빛</span></li>
+      <ul class="themes" data-anim>
+        <li class="sticker sticker--poke"><div class="swatch sw-wave" aria-hidden="true"></div><span class="l-en" lang="en">Waveform — five layered waves</span><span class="l-ko" lang="ko">기본 파형 — 다섯 겹의 파형</span></li>
+        <li class="sticker sticker--poke"><div class="swatch sw-trail" aria-hidden="true"></div><span class="l-en" lang="en">Aurora Trail — your melody leaves a glow</span><span class="l-ko" lang="ko">오로라 잔상 — 음의 궤적이 빛으로 남아요</span></li>
+        <li class="sticker sticker--poke"><div class="swatch sw-nebula" aria-hidden="true"></div><span class="l-en" lang="en">Nebula — a full-screen nebula</span><span class="l-ko" lang="ko">네뷸라 — 화면 가득한 성운</span></li>
+        <li class="sticker sticker--poke"><div class="swatch sw-kaleido" aria-hidden="true"></div><span class="l-en" lang="en">Kaleidoscope — full-screen patterns</span><span class="l-ko" lang="ko">만화경 — 화면 가득한 무늬</span></li>
+        <li class="sticker sticker--poke"><div class="swatch sw-warp" aria-hidden="true"></div><span class="l-en" lang="en">Warp Tunnel — fly through the sound</span><span class="l-ko" lang="ko">워프 터널 — 소리 속으로 질주</span></li>
+        <li class="sticker sticker--poke"><div class="swatch sw-curtain" aria-hidden="true"></div><span class="l-en" lang="en">Aurora Curtain — light across the sky</span><span class="l-ko" lang="ko">오로라 커튼 — 하늘에 드리운 빛</span></li>
       </ul>
     </section>
 
     <section class="section" aria-labelledby="aid-title">
       <div class="cards">
-        <article class="card">
+        <article class="card sticker sticker--poke">
           <h2 id="aid-title" class="h3-size"><span class="l-en" lang="en">Pitch aid</span><span class="l-ko" lang="ko">음 맞추기 도우미</span></h2>
           <ul class="l-en" lang="en">
             <li>The top readout shows the current note name and frequency in Hz.</li>
@@ -116,7 +156,7 @@
             <li>음에 정확히 맞으면 가볍게 진동해 알려 줍니다.</li>
           </ul>
         </article>
-        <article class="card">
+        <article class="card sticker sticker--poke">
           <h2 class="h3-size"><span class="l-en" lang="en">Make it yours</span><span class="l-ko" lang="ko">내 손에 맞게</span></h2>
           <ul class="l-en" lang="en">
             <li>Sound waveform</li>
@@ -133,7 +173,7 @@
     </section>
 
     <section class="section" aria-labelledby="privacy-title">
-      <div class="privacy-callout">
+      <div class="privacy-callout sticker">
         <span class="eyebrow"><span class="l-en" lang="en">Privacy</span><span class="l-ko" lang="ko">개인정보</span></span>
         <h2 id="privacy-title"><span class="l-en" lang="en">No data collected. Really.</span><span class="l-ko" lang="ko">어떤 데이터도 수집하지 않습니다.</span></h2>
         <ul class="checks l-en" lang="en">
