@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mocoder Support | FridaySnack</title>
 <script src="/assets/site.js"></script>
-<meta name="description" content="Mocoder support: how to play, answers to common questions (no sound, Height mode and camera access, warm phone, supported devices), and how to contact us.">
+<meta name="description" content="Mocoder support: how to play, answers to common questions (no sound, camera use and access, re-centering, snap vs continuous, warm phone, supported devices), and how to contact us.">
 <link rel="canonical" href="https://fridaysnack.vercel.app/mocoder/support/">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="FridaySnack">
@@ -51,27 +51,19 @@
     <h2 id="how-to-play"><span class="l-en" lang="en">How to play</span><span class="l-ko" lang="ko">연주 방법</span></h2>
     <ol class="l-en" lang="en">
       <li>Press and hold anywhere on the screen to play a tone. Release to stop.</li>
-      <li>While holding, move the phone. The pitch changes continuously.</li>
-      <li>Use the toggle at the top to switch between <strong>Tilt mode</strong> and <strong>Height mode</strong>.
-        <ul>
-          <li>Tilt mode: tilt the phone up or down. Uses the motion sensors.</li>
-          <li>Height mode: raise or lower the phone. Uses the camera through ARKit to measure how high you hold it. iOS asks for camera permission the first time you turn it on.</li>
-        </ul>
-      </li>
-      <li>Follow the readout at the top: it shows the note name and frequency (Hz), and the tuner needle shows how sharp or flat you are in cents. You feel a light haptic tick when you land on an in-tune note.</li>
-      <li>Open settings to choose a visual theme, the sound waveform, the pitch range, and the sensitivity.</li>
+      <li>While holding, raise or lower the phone. Mocoder uses the camera through ARKit to measure how high you hold it: lift to go up, lower to go down. iOS asks for camera permission the first time you open the app.</li>
+      <li>The height where you first press sets your reference note. Tap <strong>Re-center</strong> (「기준 다시 잡기」) at the top to set it again.</li>
+      <li>If the camera can't be used (access denied, no ARKit support, or tracking fails), Mocoder switches to tilt on its own: tilt the phone up or down instead. A small line at the top tells you when this happens.</li>
+      <li>Follow the readout at the top: it shows the note name and frequency (Hz), and the tuner needle shows where your hand really is, in cents. In snap mode you feel a light haptic tick each time the note changes.</li>
+      <li>Open settings to choose the play style (「연주 방식」: semitone snap or continuous), a visual theme, the sound waveform, the pitch range, and the sensitivity.</li>
     </ol>
     <ol class="l-ko" lang="ko">
       <li>화면 아무 곳이나 누르고 있으면 소리가 납니다. 손을 떼면 멈춥니다.</li>
-      <li>누른 채로 폰을 움직이면 음높이가 끊김 없이 변합니다.</li>
-      <li>화면 위쪽 토글로 <strong>기울기 모드</strong>와 <strong>높이 모드</strong>를 바꿀 수 있습니다.
-        <ul>
-          <li>기울기 모드: 폰을 위아래로 기울입니다. 모션 센서를 사용합니다.</li>
-          <li>높이 모드: 폰을 들어 올리거나 내립니다. ARKit 카메라로 폰의 높이를 측정합니다. 처음 켤 때 iOS가 카메라 권한을 요청합니다.</li>
-        </ul>
-      </li>
-      <li>화면 위쪽 표시를 보며 음을 맞춰 보세요. 음이름과 주파수(Hz), 그리고 음이 얼마나 높거나 낮은지(cents)를 튜너 바늘로 보여 줍니다. 음에 정확히 맞으면 가볍게 진동합니다.</li>
-      <li>설정에서 화면 테마, 소리 파형, 음역, 감도를 고를 수 있습니다.</li>
+      <li>누른 채로 폰을 들어 올리거나 내려 보세요. ARKit 카메라로 폰의 높이를 측정해, 들어 올리면 음이 높아지고 내리면 낮아집니다. 앱을 처음 열 때 iOS가 카메라 권한을 요청합니다.</li>
+      <li>처음 누른 높이가 기준음이 됩니다. 화면 위쪽 「기준 다시 잡기」를 누르면 기준을 다시 잡습니다.</li>
+      <li>카메라를 쓸 수 없으면(권한 거부, ARKit 미지원, 추적 실패) 자동으로 기울기 연주로 바뀝니다. 폰을 위아래로 기울여 연주하세요. 이때 화면 위쪽에 작은 안내가 나옵니다.</li>
+      <li>화면 위쪽 표시를 보며 음을 맞춰 보세요. 음이름과 주파수(Hz)를 보여 주고, 튜너 바늘은 손의 실제 위치를 cents로 보여 줍니다. 반음 스냅에서는 음이 바뀔 때마다 가볍게 진동합니다.</li>
+      <li>설정에서 연주 방식(반음 스냅 / 연속음), 화면 테마, 소리 파형, 음역, 감도를 고를 수 있습니다.</li>
     </ol>
 
     <h2 id="faq"><span class="l-en" lang="en">FAQ</span><span class="l-ko" lang="ko">자주 묻는 질문</span></h2>
@@ -96,47 +88,93 @@
       </div>
     </details>
 
-    <details class="faq" id="height-mode">
-      <summary><span class="l-en" lang="en">Height mode doesn't work or the pitch won't move.</span><span class="l-ko" lang="ko">높이 모드가 동작하지 않거나 음이 움직이지 않아요.</span></summary>
+    <details class="faq" id="camera">
+      <summary><span class="l-en" lang="en">Why does Mocoder use the camera?</span><span class="l-ko" lang="ko">왜 카메라를 쓰나요?</span></summary>
       <div class="l-en" lang="en">
-        <p>Height mode needs camera access and works best in good light, pointed at a scene with some visible detail (not a blank wall or a dark room).</p>
-        <p>If you denied camera access earlier, turn it back on:</p>
+        <p>To measure how high you hold the phone. ARKit world tracking reads the camera on your device in real time, and that height sets the pitch. Nothing is recorded, saved, or sent anywhere. The camera is off while Settings is open or the app is in the background. See the <a href="/mocoder/privacy/">privacy policy</a>.</p>
+      </div>
+      <div class="l-ko" lang="ko">
+        <p>폰을 얼마나 높이 들고 있는지 측정하기 위해서입니다. ARKit 월드 트래킹이 기기 안에서 카메라 영상을 실시간으로 처리해 그 높이로 음높이를 정합니다. 영상은 녹화하거나 저장하거나 전송하지 않습니다. 설정 화면을 열거나 앱이 백그라운드로 가면 카메라를 끕니다. <a href="/mocoder/privacy/">개인정보 처리방침</a>을 참고해 주세요.</p>
+      </div>
+    </details>
+
+    <details class="faq" id="camera-denied">
+      <summary><span class="l-en" lang="en">I denied camera access.</span><span class="l-ko" lang="ko">카메라 권한을 거부했어요.</span></summary>
+      <div class="l-en" lang="en">
+        <p>No problem: Mocoder keeps working with tilt. Tilt the phone up or down to change the pitch.</p>
+        <p>To play with height again, tap the small hint at the top of the screen (it opens Settings), or turn camera access back on yourself:</p>
         <ol>
           <li>Open the <strong>Settings</strong> app.</li>
           <li>Scroll down and tap <strong>Mocoder</strong>.</li>
           <li>Turn on <strong>Camera</strong>.</li>
         </ol>
-        <p>You can also find it under Settings &gt; Privacy &amp; Security &gt; Camera. Without camera access, Mocoder keeps working in Tilt mode.</p>
       </div>
       <div class="l-ko" lang="ko">
-        <p>높이 모드는 카메라 권한이 필요하며, 밝은 곳에서 무늬나 사물이 보이는 쪽을 비출 때 가장 잘 동작합니다. (빈 벽이나 어두운 방에서는 잘 동작하지 않을 수 있습니다.)</p>
-        <p>예전에 카메라 권한을 거부했다면 다시 켜 주세요.</p>
+        <p>괜찮습니다. Mocoder는 기울기로 계속 연주할 수 있습니다. 폰을 위아래로 기울이면 음이 바뀝니다.</p>
+        <p>다시 높이로 연주하려면 화면 위쪽의 작은 안내를 누르거나(설정 앱이 열립니다) 직접 카메라 권한을 켜 주세요.</p>
         <ol>
           <li><strong>설정</strong> 앱을 엽니다.</li>
           <li>아래로 내려 <strong>Mocoder</strong>를 누릅니다.</li>
           <li><strong>카메라</strong>를 켭니다.</li>
         </ol>
-        <p>설정 &gt; 개인정보 보호 및 보안 &gt; 카메라에서도 바꿀 수 있습니다. 카메라 권한이 없어도 기울기 모드로 계속 사용할 수 있습니다.</p>
+      </div>
+    </details>
+
+    <details class="faq" id="height-tracking">
+      <summary><span class="l-en" lang="en">The pitch won't follow the height.</span><span class="l-ko" lang="ko">높이를 바꿔도 음이 잘 따라오지 않아요.</span></summary>
+      <div class="l-en" lang="en">
+        <p>Height tracking works best in good light, with the camera pointed at a scene with some visible detail (not a blank wall or a dark room). Don't cover the camera with your fingers. If tracking can't start, Mocoder switches to tilt and says so at the top.</p>
+      </div>
+      <div class="l-ko" lang="ko">
+        <p>높이 추적은 밝은 곳에서 무늬나 사물이 보이는 쪽을 비출 때 가장 잘 동작합니다. (빈 벽이나 어두운 방에서는 잘 동작하지 않을 수 있습니다.) 손가락으로 카메라를 가리지 마세요. 추적을 시작하지 못하면 자동으로 기울기 연주로 바뀌고 화면 위쪽에 알려 줍니다.</p>
+      </div>
+    </details>
+
+    <details class="faq" id="recenter">
+      <summary><span class="l-en" lang="en">How do I re-center?</span><span class="l-ko" lang="ko">기준은 어떻게 다시 잡나요?</span></summary>
+      <div class="l-en" lang="en">
+        <p>The height where you first press becomes the reference note. To move it, hold the phone where you want the middle of your range and tap <strong>Re-center</strong> (「기준 다시 잡기」) at the top of the screen. You can pick the reference note itself in settings.</p>
+      </div>
+      <div class="l-ko" lang="ko">
+        <p>처음 누른 높이가 기준음이 됩니다. 기준을 옮기려면 음역의 가운데로 쓰고 싶은 높이에 폰을 두고 화면 위쪽 「기준 다시 잡기」를 누르세요. 기준음 자체는 설정에서 고를 수 있습니다.</p>
+      </div>
+    </details>
+
+    <details class="faq" id="snap">
+      <summary><span class="l-en" lang="en">What's the difference between snap and continuous?</span><span class="l-ko" lang="ko">반음 스냅과 연속음은 뭐가 다른가요?</span></summary>
+      <div class="l-en" lang="en">
+        <p>Change it in settings under 「연주 방식」 (play style).</p>
+        <ul>
+          <li><strong>Semitone snap</strong> (default): the pitch lands on the nearest note with a short glide, and you feel a tick each time the note changes. It won't flicker when your hand sits between two notes. The tuner needle still shows where your hand really is.</li>
+          <li><strong>Continuous</strong>: the classic theremin glide. The pitch follows your hand smoothly, with no steps.</li>
+        </ul>
+      </div>
+      <div class="l-ko" lang="ko">
+        <p>설정의 「연주 방식」에서 바꿀 수 있습니다.</p>
+        <ul>
+          <li><strong>반음 스냅</strong>(기본값): 음이 가장 가까운 반음에 짧게 미끄러지듯 맞춰지고, 음이 바뀔 때마다 가볍게 진동합니다. 손이 두 음 사이에 있어도 음이 왔다 갔다 하지 않습니다. 튜너 바늘은 손의 실제 위치를 그대로 보여 줍니다.</li>
+          <li><strong>연속음</strong>: 테레민처럼 음이 손을 따라 끊김 없이 부드럽게 변합니다.</li>
+        </ul>
       </div>
     </details>
 
     <details class="faq" id="warm">
       <summary><span class="l-en" lang="en">My phone gets warm during long sessions.</span><span class="l-ko" lang="ko">오래 연주하면 폰이 따뜻해져요.</span></summary>
       <div class="l-en" lang="en">
-        <p>That's normal. Real-time sound, full-screen visuals, and (in Height mode) the camera all keep the phone busy. Take short breaks during long sessions. Tilt mode doesn't use the camera, so it's lighter on the phone.</p>
+        <p>That's normal. Camera-based height tracking, real-time sound, and full-screen visuals all keep the phone busy. When the phone gets hot, Mocoder quietly lowers its frame rate to go easy on it. Take short breaks during long sessions.</p>
       </div>
       <div class="l-ko" lang="ko">
-        <p>정상입니다. 실시간 소리 합성, 화면 가득한 그래픽, 그리고 높이 모드에서는 카메라까지 함께 동작하기 때문입니다. 오래 연주할 때는 잠깐씩 쉬어 주세요. 기울기 모드는 카메라를 쓰지 않아 폰에 부담이 덜합니다.</p>
+        <p>정상입니다. 카메라로 높이를 추적하면서 실시간 소리 합성과 화면 가득한 그래픽이 함께 동작하기 때문입니다. 폰이 뜨거워지면 Mocoder가 조용히 화면 갱신 속도를 낮춰 부담을 줄입니다. 오래 연주할 때는 잠깐씩 쉬어 주세요.</p>
       </div>
     </details>
 
     <details class="faq" id="devices">
       <summary><span class="l-en" lang="en">Which devices are supported?</span><span class="l-ko" lang="ko">어떤 기기에서 쓸 수 있나요?</span></summary>
       <div class="l-en" lang="en">
-        <p>iPhone with iOS 16.4 or later. Height mode requires an iPhone that supports ARKit.</p>
+        <p>iPhone with iOS 16.4 or later. Playing with height requires an iPhone that supports ARKit; on other iPhones you play by tilting.</p>
       </div>
       <div class="l-ko" lang="ko">
-        <p>iOS 16.4 이상의 iPhone에서 사용할 수 있습니다. 높이 모드는 ARKit을 지원하는 iPhone이 필요합니다.</p>
+        <p>iOS 16.4 이상의 iPhone에서 사용할 수 있습니다. 높이 연주는 ARKit을 지원하는 iPhone이 필요하며, 그 밖의 iPhone에서는 기울기로 연주합니다.</p>
       </div>
     </details>
 

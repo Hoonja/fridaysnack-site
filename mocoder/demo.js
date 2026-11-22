@@ -39,6 +39,7 @@
   var needle = document.getElementById('demo-needle');
   var statusEl = document.getElementById('demo-status');
   var tiltBtn = document.getElementById('tilt-btn');
+  var snapBtn = document.getElementById('snap-btn');
 
   var reduceMQ = window.matchMedia('(prefers-reduced-motion: reduce)');
   var reduced = reduceMQ.matches;
@@ -54,6 +55,7 @@
   var tiltOn = false;
   var tiltLog = 1;
   var gotTilt = false;
+  var snapOn = false;         // round the sounding pitch to the nearest semitone
   var dirty = true;
 
   // ---- audio -------------------------------------------------------------------
@@ -93,7 +95,7 @@
   }
   function applyFreq() {
     if (!ctx) return;
-    osc.frequency.setTargetAtTime(logToHz(targetLog), ctx.currentTime, 0.012);
+    osc.frequency.setTargetAtTime(logToHz(soundLog(targetLog)), ctx.currentTime, 0.012);
   }
 
   function isPlaying() { return holders.pointer || holders.key; }
@@ -124,11 +126,14 @@
   }
 
   // ---- pitch -------------------------------------------------------------------
+  // Snap: the sound and note/Hz follow the nearest semitone (A notes sit on whole
+  // twelfths of the 220 Hz log scale); the needle keeps showing the raw hand pitch.
+  function soundLog(l) { return snapOn ? Math.round(l * 12) / 12 : l; }
   var lastAria = '';
   function setTarget(l) {
     targetLog = clamp(l, 0, OCTAVES);
     applyFreq();
-    var hz = logToHz(targetLog);
+    var hz = logToHz(soundLog(targetLog));
     var n = freqToNote(hz);
     var text = n.name + ', ' + Math.round(hz) + ' Hz';
     if (text !== lastAria) {
@@ -207,6 +212,18 @@
     if (document.hidden) stopAll();
     else wake();
   });
+
+  // ---- option: snap to semitones ----------------------------------------------
+  if (snapBtn) {
+    snapBtn.hidden = false;
+    snapBtn.addEventListener('click', function () {
+      snapOn = !snapOn;
+      snapBtn.setAttribute('aria-pressed', snapOn ? 'true' : 'false');
+      say(snapOn ? 'Snap is on. The pitch jumps to the nearest note.' : 'Snap is off. The pitch glides freely.',
+          snapOn ? '반음 스냅 켜짐. 가장 가까운 음으로 맞춰져요.' : '반음 스냅 꺼짐. 음이 자유롭게 미끄러져요.');
+      setTarget(targetLog);
+    });
+  }
 
   // ---- input: tilt (optional, phones) -------------------------------------------
   function say(en, ko) {
@@ -348,8 +365,13 @@
   function updateReadout() {
     var hz = logToHz(shownLog);
     var n = freqToNote(hz);
+    var name = n.name;
+    if (snapOn) {
+      hz = logToHz(soundLog(shownLog));
+      name = freqToNote(hz).name;
+    }
     var hzText = hz.toFixed(1) + ' Hz';
-    if (n.name !== lastNote) { noteEl.textContent = n.name; lastNote = n.name; }
+    if (name !== lastNote) { noteEl.textContent = name; lastNote = name; }
     if (hzText !== lastHz) { hzEl.textContent = hzText; lastHz = hzText; }
     if (n.cents !== lastCents) {
       lastCents = n.cents;

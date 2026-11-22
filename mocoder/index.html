@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mocoder — Move your phone to make music | FridaySnack</title>
 <script src="/assets/site.js"></script>
-<meta name="description" content="Mocoder is a motion synthesizer for iPhone. Press and hold anywhere for sound, then tilt or raise your phone to bend the pitch like a theremin. Free, no data collected.">
+<meta name="description" content="Mocoder is a motion synthesizer for iPhone. Press and hold anywhere for sound, then raise or lower your phone to bend the pitch like a theremin. Snap to notes or glide freely. Free, no data collected.">
 <link rel="canonical" href="https://fridaysnack.vercel.app/mocoder/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="FridaySnack">
@@ -51,8 +51,8 @@
       <div>
         <h1 id="app-title">Mocoder</h1>
         <p class="tagline"><span class="l-en" lang="en">Move your phone to make music</span><span class="l-ko" lang="ko">폰을 움직여 연주하는 모션 악기</span></p>
-        <p class="l-en" lang="en">Hold the screen and tilt or raise your phone to bend the pitch. Play in mid-air like a theremin, and watch your sound come alive in six visual themes.</p>
-        <p class="l-ko" lang="ko">화면을 누르고 폰을 기울이거나 들어 올리면 음이 따라 움직입니다. 테레민처럼 공중에서 연주하고, 여섯 가지 화면 테마로 소리를 눈으로도 즐겨 보세요.</p>
+        <p class="l-en" lang="en">Hold the screen and raise or lower your phone to bend the pitch. Play in mid-air like a theremin, and watch your sound come alive in six visual themes.</p>
+        <p class="l-ko" lang="ko">화면을 누르고 폰을 들어 올리거나 내리면 음이 따라 움직입니다. 테레민처럼 공중에서 연주하고, 여섯 가지 화면 테마로 소리를 눈으로도 즐겨 보세요.</p>
         <!-- App Store button: coming-soon state. Set APP_STORE_URLS.mocoder in /assets/site.js to turn it into a real link. -->
         <div class="btn-row">
           <span class="store-btn store-btn--soon" data-appstore="mocoder">
@@ -91,6 +91,7 @@
           <p class="pad-label" aria-hidden="true"><span class="l-en" lang="en">Press &amp; hold here</span><span class="l-ko" lang="ko">여기를 누르고 있어 보세요</span></p>
         </div>
         <div class="demo-controls">
+          <button class="chip-btn" type="button" id="snap-btn" aria-pressed="false" hidden><span class="l-en" lang="en">Snap to notes</span><span class="l-ko" lang="ko">반음 스냅</span></button>
           <button class="chip-btn" type="button" id="tilt-btn" aria-pressed="false" hidden><span class="l-en" lang="en">Use tilt</span><span class="l-ko" lang="ko">기울기로 연주</span></button>
           <p class="demo-hint"><strong><span class="l-en" lang="en">Sound on.</span><span class="l-ko" lang="ko">소리를 켜 주세요.</span></strong> <span class="l-en" lang="en">Hold to play. Slide up or down to bend the pitch, sideways to fine-tune.</span><span class="l-ko" lang="ko">누르고 있으면 소리가 나요. 위아래로 밀면 음이 바뀌고, 옆으로 밀면 미세 조정돼요.</span></p>
         </div>
@@ -106,24 +107,28 @@
       <h2 id="how-title"><span class="l-en" lang="en">Like a theremin, in your pocket</span><span class="l-ko" lang="ko">주머니 속 테레민</span></h2>
       <ol class="steps">
         <li class="sticker"><span class="l-en" lang="en">Press and hold anywhere on the screen to play a tone. Let go to stop.</span><span class="l-ko" lang="ko">화면 아무 곳이나 누르고 있으면 소리가 나고, 손을 떼면 멈춥니다.</span></li>
-        <li class="sticker"><span class="l-en" lang="en">Keep holding and move the phone. The pitch glides smoothly, with no steps.</span><span class="l-ko" lang="ko">누른 채로 폰을 움직이면 음높이가 끊김 없이 부드럽게 변합니다.</span></li>
-        <li class="sticker"><span class="l-en" lang="en">Watch the readout to land on a note, and feel a light tick when you hit it.</span><span class="l-ko" lang="ko">화면 위 표시를 보며 음을 맞추고, 정확히 맞으면 가벼운 진동으로 느껴 보세요.</span></li>
+        <li class="sticker"><span class="l-en" lang="en">Keep holding and lift the phone to go up, lower it to go down. The pitch lands neatly on each note.</span><span class="l-ko" lang="ko">누른 채로 폰을 들어 올리면 음이 높아지고, 내리면 낮아집니다. 음이 반음마다 딱딱 맞춰집니다.</span></li>
+        <li class="sticker"><span class="l-en" lang="en">Watch the readout for the note name, and feel a light tick each time you move to a new note.</span><span class="l-ko" lang="ko">화면 위 표시로 음이름을 확인하고, 새 음으로 넘어갈 때마다 가벼운 진동을 느껴 보세요.</span></li>
       </ol>
     </section>
 
     <section class="section" aria-labelledby="modes-title">
-      <span class="eyebrow"><span class="l-en" lang="en">Two ways to play</span><span class="l-ko" lang="ko">두 가지 연주 방식</span></span>
-      <h2 id="modes-title"><span class="l-en" lang="en">Tilt it or lift it</span><span class="l-ko" lang="ko">기울이거나, 들어 올리거나</span></h2>
+      <span class="eyebrow"><span class="l-en" lang="en">How it hears you</span><span class="l-ko" lang="ko">이렇게 알아들어요</span></span>
+      <h2 id="modes-title"><span class="l-en" lang="en">Lift it, then snap or glide</span><span class="l-ko" lang="ko">들어 올리고, 딱딱 또는 스르르</span></h2>
       <div class="cards">
-        <article class="card card--sky sticker sticker--poke">
-          <h3><span class="l-en" lang="en">Tilt mode</span><span class="l-ko" lang="ko">기울기 모드</span></h3>
-          <p class="l-en" lang="en">Tilt the phone up or down to raise or lower the pitch. Uses the motion sensors, works anywhere.</p>
-          <p class="l-ko" lang="ko">폰을 위아래로 기울이면 음이 올라가고 내려갑니다. 모션 센서를 사용하며 어디서나 동작합니다.</p>
-        </article>
         <article class="card card--grape sticker sticker--poke">
-          <h3><span class="l-en" lang="en">Height mode</span><span class="l-ko" lang="ko">높이 모드</span></h3>
-          <p class="l-en" lang="en">ARKit uses the camera to track how high you are actually holding the phone. Lift it to go up, lower it to go down. Works best in good light.</p>
-          <p class="l-ko" lang="ko">ARKit 카메라로 폰의 실제 높이를 측정합니다. 폰을 들어 올리면 음이 높아지고, 내리면 낮아집니다. 밝은 곳에서 가장 잘 동작합니다.</p>
+          <h3><span class="l-en" lang="en">Play with height</span><span class="l-ko" lang="ko">높이로 연주</span></h3>
+          <p class="l-en" lang="en">ARKit uses the camera to track how high you are actually holding the phone. Lift it to go up, lower it to go down. Tap <strong>Re-center</strong> to set your starting height. Works best in good light.</p>
+          <p class="l-ko" lang="ko">ARKit 카메라로 폰의 실제 높이를 측정합니다. 폰을 들어 올리면 음이 높아지고, 내리면 낮아집니다. <strong>기준 다시 잡기</strong>로 시작 높이를 정할 수 있어요. 밝은 곳에서 가장 잘 동작합니다.</p>
+          <p class="l-en" lang="en">No camera? Mocoder switches to tilt on its own: tilt the phone up or down instead.</p>
+          <p class="l-ko" lang="ko">카메라를 쓸 수 없으면 자동으로 기울기 연주로 바뀝니다. 폰을 위아래로 기울여 연주하세요.</p>
+        </article>
+        <article class="card card--sky sticker sticker--poke">
+          <h3><span class="l-en" lang="en">Snap or glide</span><span class="l-ko" lang="ko">반음 스냅 또는 연속음</span></h3>
+          <p class="l-en" lang="en"><strong>Semitone snap</strong> (the default) lands the pitch on the nearest note with a quick little glide, and you feel a tick on every new note. Easy to play a tune.</p>
+          <p class="l-ko" lang="ko"><strong>반음 스냅</strong>(기본값)은 음을 가장 가까운 반음에 맞추고 짧게 미끄러지듯 넘어갑니다. 음이 바뀔 때마다 톡 하고 진동해요. 멜로디 연주가 쉬워집니다.</p>
+          <p class="l-en" lang="en">Prefer the classic theremin swoop? Pick <strong>Continuous</strong> in settings and the pitch glides freely between notes.</p>
+          <p class="l-ko" lang="ko">테레민 특유의 미끄러지는 소리가 좋다면 설정의 「연주 방식」에서 <strong>연속음</strong>을 고르세요. 음 사이를 자유롭게 오갑니다.</p>
         </article>
       </div>
     </section>
@@ -147,23 +152,25 @@
           <h2 id="aid-title" class="h3-size"><span class="l-en" lang="en">Pitch aid</span><span class="l-ko" lang="ko">음 맞추기 도우미</span></h2>
           <ul class="l-en" lang="en">
             <li>The top readout shows the current note name and frequency in Hz.</li>
-            <li>A tuner needle shows how sharp or flat you are, in cents.</li>
-            <li>A light haptic tick lets you feel when you land right on a note.</li>
+            <li>A tuner needle shows where your hand really is, in cents, even while the pitch snaps.</li>
+            <li>A light haptic tick lets you feel each new note.</li>
           </ul>
           <ul class="l-ko" lang="ko">
             <li>화면 위쪽에 지금 음이름과 주파수(Hz)를 보여 줍니다.</li>
-            <li>튜너 바늘이 음이 얼마나 높거나 낮은지(cents) 알려 줍니다.</li>
-            <li>음에 정확히 맞으면 가볍게 진동해 알려 줍니다.</li>
+            <li>튜너 바늘은 음이 스냅되는 동안에도 손의 실제 위치를 cents로 보여 줍니다.</li>
+            <li>새 음으로 넘어갈 때마다 가볍게 진동해 알려 줍니다.</li>
           </ul>
         </article>
         <article class="card sticker sticker--poke">
           <h2 class="h3-size"><span class="l-en" lang="en">Make it yours</span><span class="l-ko" lang="ko">내 손에 맞게</span></h2>
           <ul class="l-en" lang="en">
+            <li>Play style: snap or continuous</li>
             <li>Sound waveform</li>
             <li>Pitch range</li>
             <li>Sensitivity</li>
           </ul>
           <ul class="l-ko" lang="ko">
+            <li>연주 방식: 반음 스냅 또는 연속음</li>
             <li>소리 파형</li>
             <li>음역</li>
             <li>감도</li>
