@@ -139,7 +139,7 @@ npx vercel --prod   # production deploy
    Alternatively, point the domain's nameservers to Vercel (`ns1.vercel-dns.com`,
    `ns2.vercel-dns.com`) and let Vercel manage DNS.
 3. Wait for Vercel to show the domain as valid; HTTPS certificates are issued automatically.
-4. If email for `hello@fridaysnack.com` is hosted elsewhere, keep its `MX`/`TXT`
+4. If a domain mailbox is set up later, keep its `MX`/`TXT`
    records when changing DNS.
 
 After deploy, check that these URLs return 200 before submitting to App Review:
@@ -150,4 +150,4 @@ After deploy, check that these URLs return 200 before submitting to App Review:
 
 - No trackers, analytics, cookies, or third-party scripts. The only external
   request is Google Fonts (Jua + IBM Plex Sans KR).
-- The only contact address on the site is hello@fridaysnack.com.
+- The only contact address on the site is fsnack.support@gmail.com.
