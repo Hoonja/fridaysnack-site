@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mocoder Privacy Policy | FridaySnack</title>
 <script src="/assets/site.js"></script>
-<meta name="description" content="Mocoder privacy policy. Mocoder collects no data: no accounts, no analytics, no ads, and no network access. Camera and motion data stay on your device.">
+<meta name="description" content="Mocoder privacy policy. No personal data, no accounts, no ads, no tracking. Camera and motion data stay on your device. From version 1.1, anonymous usage statistics via TelemetryDeck.">
 <link rel="canonical" href="https://fridaysnack.vercel.app/mocoder/privacy/">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="FridaySnack">
 <meta property="og:title" content="Mocoder Privacy Policy">
-<meta property="og:description" content="Mocoder collects no data. Camera and motion data stay on your device.">
+<meta property="og:description" content="No personal data and no tracking. Camera and motion data stay on your device. Anonymous usage statistics only.">
 <meta property="og:url" content="https://fridaysnack.vercel.app/mocoder/privacy/">
 <link rel="icon" href="/mocoder/icon-256.png" type="image/png">
 <link rel="apple-touch-icon" href="/mocoder/apple-touch-icon.png">
@@ -45,14 +45,14 @@
   <div class="wrap narrow">
     <p class="breadcrumb"><a href="/">FridaySnack</a> / <a href="/mocoder/">Mocoder</a> / <span class="l-en" lang="en">Privacy</span><span class="l-ko" lang="ko">개인정보</span></p>
     <h1><span class="l-en" lang="en">Mocoder Privacy Policy</span><span class="l-ko" lang="ko">Mocoder 개인정보 처리방침</span></h1>
-    <p class="date"><span class="l-en" lang="en">Effective date: <time datetime="2026-11-22">2026-11-22</time></span><span class="l-ko" lang="ko">시행일: <time datetime="2026-11-22">2026-11-22</time></span></p>
+    <p class="date"><span class="l-en" lang="en">Effective date: <time datetime="2026-11-24">2026-11-24</time></span><span class="l-ko" lang="ko">시행일: <time datetime="2026-11-24">2026-11-24</time></span></p>
 
     <p class="l-en" lang="en">Mocoder is a musical instrument app that you play by moving your phone. This policy explains what information Mocoder handles.</p>
     <p class="l-ko" lang="ko">Mocoder는 폰을 움직여 소리를 연주하는 악기 앱입니다. 이 방침은 Mocoder가 어떤 정보를 다루는지 설명합니다.</p>
 
-    <h2><span class="l-en" lang="en">1. No data collected</span><span class="l-ko" lang="ko">1. 수집하는 정보 없음</span></h2>
-    <p class="l-en" lang="en">Mocoder does not collect any personal data. No name, email, location, contacts, device identifiers, or usage history is sent to the developer or to any third party.</p>
-    <p class="l-ko" lang="ko">Mocoder는 어떤 개인정보도 수집하지 않습니다. 이름, 이메일, 위치, 연락처, 기기 식별자, 사용 기록 등 어떤 정보도 개발자나 제3자에게 전송되지 않습니다.</p>
+    <h2><span class="l-en" lang="en">1. No personal data collected</span><span class="l-ko" lang="ko">1. 개인정보를 수집하지 않습니다</span></h2>
+    <p class="l-en" lang="en">Mocoder does not collect personal data such as your name, email, contacts, precise location, or advertising identifier (IDFA). Starting with version 1.1, it sends only anonymous usage statistics that cannot identify you, to help improve the app (section 5).</p>
+    <p class="l-ko" lang="ko">Mocoder는 이름, 이메일, 연락처, 정확한 위치, 광고 식별자(IDFA) 같은 개인정보를 수집하지 않습니다. 버전 1.1부터는 앱을 개선하기 위해 누구인지 알 수 없는 익명 사용 통계만 보냅니다(5항).</p>
 
     <h2><span class="l-en" lang="en">2. Camera (Height play)</span><span class="l-ko" lang="ko">2. 카메라 (높이 연주)</span></h2>
     <p class="l-en" lang="en">The camera is used while the play screen is open (it is turned off while Settings is open or the app is in the background). Apple ARKit world tracking measures how high you hold the phone, and that height sets the pitch. Camera frames are processed on the device in real time only. They are never stored or transmitted. If you deny camera access, the app keeps working with tilt.</p>
@@ -62,23 +62,37 @@
     <p class="l-en" lang="en">When the camera is not available (access denied or no ARKit support), the app reads the phone's tilt from the device motion sensors to change the pitch. This data is processed on the device only and is never stored or transmitted.</p>
     <p class="l-ko" lang="ko">카메라를 쓸 수 없을 때(권한 거부 또는 ARKit 미지원)는 기기의 모션 센서로 폰의 기울기를 읽어 음높이를 바꿉니다. 이 데이터는 기기 안에서만 처리되며 저장하거나 전송하지 않습니다.</p>
 
-    <h2><span class="l-en" lang="en">4. Settings stored on your device</span><span class="l-ko" lang="ko">4. 기기에 저장되는 설정</span></h2>
-    <p class="l-en" lang="en">Settings such as theme, sensitivity, waveform, and pitch range are saved only in on-device SQLite storage (expo-sqlite). They are never sent off the device and are deleted when you delete the app.</p>
-    <p class="l-ko" lang="ko">테마, 감도, 파형, 음역 같은 설정은 기기 안의 SQLite 저장소(expo-sqlite)에만 저장됩니다. 이 설정은 외부로 전송되지 않으며 앱을 삭제하면 함께 삭제됩니다.</p>
+    <h2><span class="l-en" lang="en">4. Information stored on your device</span><span class="l-ko" lang="ko">4. 기기에 저장되는 정보</span></h2>
+    <p class="l-en" lang="en">Settings such as theme, sensitivity, waveform, and pitch range, and internal app information such as the launch count, the date of the last review request, and a random ID created at install, are saved in on-device SQLite storage (expo-sqlite). They are deleted when you delete the app. The only part of this that leaves the device is the hashed ID described in section 5.</p>
+    <p class="l-ko" lang="ko">테마, 감도, 파형, 음역 같은 설정과, 앱 실행 횟수·마지막 리뷰 요청 날짜·설치 때 만든 무작위 ID 같은 앱 내부 정보는 기기 안의 SQLite 저장소(expo-sqlite)에 저장됩니다. 앱을 삭제하면 함께 삭제됩니다. 이 중 외부로 나가는 것은 5항의 해시된 ID뿐입니다.</p>
 
-    <h2><span class="l-en" lang="en">5. No network, analytics, ads, or accounts</span><span class="l-ko" lang="ko">5. 네트워크·분석·광고·계정 없음</span></h2>
-    <p class="l-en" lang="en">Mocoder does not communicate over the internet. It uses no analytics, no advertising, no accounts or login, no crash reporting, and no third-party SDKs that collect data.</p>
-    <p class="l-ko" lang="ko">Mocoder는 인터넷 통신을 하지 않습니다. 분석 도구, 광고, 계정, 로그인, 충돌 보고 도구, 데이터를 수집하는 제3자 SDK를 사용하지 않습니다.</p>
+    <h2><span class="l-en" lang="en">5. Anonymous usage statistics (TelemetryDeck)</span><span class="l-ko" lang="ko">5. 익명 사용 통계 (TelemetryDeck)</span></h2>
+    <p class="l-en" lang="en">Starting with version 1.1, Mocoder sends anonymous usage events to TelemetryDeck (TelemetryDeck GmbH, Germany) to learn which features are used. TelemetryDeck processes this data on the developer's behalf.</p>
+    <p class="l-ko" lang="ko">버전 1.1부터 Mocoder는 어떤 기능이 쓰이는지 파악하기 위해 익명 사용 이벤트를 TelemetryDeck(독일 TelemetryDeck GmbH)에 보냅니다. TelemetryDeck은 개발자를 대신해 이 데이터를 처리하는 처리자입니다.</p>
+    <p class="l-en" lang="en">Events sent: app launch, play session length range (for example 30-120 seconds), input mode (height or tilt), theme, play mode, the name of a changed setting (never its value), camera permission result, whether a review prompt was requested, and that the feedback screen was opened. Each event includes the app version and build, iOS version, device model, and language and region setting.</p>
+    <p class="l-ko" lang="ko">보내는 이벤트: 앱 실행, 연주 시간 구간(예: 30~120초), 입력 방식(높이/기울기), 테마, 연주 방식, 바뀐 설정의 이름(값은 보내지 않음), 카메라 권한 결과, 리뷰 요청 여부, 의견 보내기 화면 열림. 각 이벤트에는 앱 버전과 빌드, iOS 버전, 기기 모델, 언어·지역 설정이 함께 담깁니다.</p>
+    <p class="l-en" lang="en">Identifier: a random ID is created on the device at install, and only its SHA-256 hash, computed on the device, is sent. TelemetryDeck hashes it again. This ID is not linked to your identity or to data from other apps or websites, and it is not used for tracking. Mocoder does not read the advertising identifier (IDFA) and does not ask for App Tracking Transparency (ATT) permission.</p>
+    <p class="l-ko" lang="ko">식별자: 설치 때 기기에서 무작위 ID를 만들고, 기기 안에서 SHA-256으로 해시한 값만 보냅니다. TelemetryDeck은 이 값을 한 번 더 해시합니다. 이 ID는 사용자의 신원이나 다른 앱·웹사이트의 데이터와 연결되지 않으며, 추적(tracking)에 쓰이지 않습니다. 광고 식별자(IDFA)는 읽지 않으며 앱 추적 투명성(ATT) 권한도 요청하지 않습니다.</p>
+    <p class="l-en" lang="en">Never sent: name, email, precise location, camera frames, sound, or what you play. Camera frames and sound never leave the device. TelemetryDeck does not store IP addresses, and its servers are in the EU (the Netherlands and Germany).</p>
+    <p class="l-ko" lang="ko">보내지 않는 것: 이름, 이메일, 정확한 위치, 카메라 영상, 소리, 연주 내용. 카메라 영상과 소리는 기기 밖으로 나가지 않습니다. TelemetryDeck은 IP 주소를 저장하지 않으며, 서버는 EU(네덜란드, 독일)에 있습니다.</p>
 
-    <h2><span class="l-en" lang="en">6. Children's privacy</span><span class="l-ko" lang="ko">6. 아동 개인정보</span></h2>
-    <p class="l-en" lang="en">Mocoder is safe for all ages. It collects no information from anyone, including children.</p>
-    <p class="l-ko" lang="ko">Mocoder는 모든 연령이 안전하게 사용할 수 있습니다. 아동을 포함한 누구의 정보도 수집하지 않습니다.</p>
+    <h2><span class="l-en" lang="en">6. Send feedback</span><span class="l-ko" lang="ko">6. 의견 보내기</span></h2>
+    <p class="l-en" lang="en">"Send Feedback" in Settings opens your own mail app with a message to fsnack.support@gmail.com. The body is prefilled with the app version, build, iOS version, and device model, which you can delete before sending. The email is sent only when you send it yourself, and it is used only to reply and to improve the app.</p>
+    <p class="l-ko" lang="ko">설정의 「의견 보내기」는 기기의 메일 앱을 열어 fsnack.support@gmail.com으로 보낼 메일을 준비합니다. 본문에는 앱 버전, 빌드, iOS 버전, 기기 모델이 미리 적혀 있으며 보내기 전에 지울 수 있습니다. 메일은 사용자가 직접 보낼 때만 전송되며, 받은 메일은 답변과 앱 개선에만 사용합니다.</p>
 
-    <h2><span class="l-en" lang="en">7. Changes to this policy</span><span class="l-ko" lang="ko">7. 방침 변경</span></h2>
+    <h2><span class="l-en" lang="en">7. No ads, tracking, or accounts</span><span class="l-ko" lang="ko">7. 광고·추적·계정 없음</span></h2>
+    <p class="l-en" lang="en">Mocoder has no advertising, no accounts or login, and no crash reporting, and it does not track you. Apart from the anonymous statistics in section 5, it sends no data over the internet.</p>
+    <p class="l-ko" lang="ko">Mocoder는 광고, 계정, 로그인, 충돌 보고 도구를 사용하지 않으며 사용자를 추적하지 않습니다. 5항의 익명 통계 외에는 인터넷으로 데이터를 보내지 않습니다.</p>
+
+    <h2><span class="l-en" lang="en">8. Children's privacy</span><span class="l-ko" lang="ko">8. 아동 개인정보</span></h2>
+    <p class="l-en" lang="en">Mocoder is safe for all ages. It collects no personal data from anyone, including children.</p>
+    <p class="l-ko" lang="ko">Mocoder는 모든 연령이 안전하게 사용할 수 있습니다. 아동을 포함한 누구의 개인정보도 수집하지 않습니다.</p>
+
+    <h2><span class="l-en" lang="en">9. Changes to this policy</span><span class="l-ko" lang="ko">9. 방침 변경</span></h2>
     <p class="l-en" lang="en">If this policy changes, the new version will be posted on this page and the effective date above will be updated.</p>
     <p class="l-ko" lang="ko">이 방침이 바뀌면 이 페이지에 게시하고 위의 시행일을 갱신합니다.</p>
 
-    <h2><span class="l-en" lang="en">8. Contact</span><span class="l-ko" lang="ko">8. 문의</span></h2>
+    <h2><span class="l-en" lang="en">10. Contact</span><span class="l-ko" lang="ko">10. 문의</span></h2>
     <p class="l-en" lang="en">If you have questions, contact:</p>
     <p class="l-ko" lang="ko">질문이 있으면 아래로 연락해 주세요.</p>
     <p class="email"><a href="mailto:fsnack.support@gmail.com">fsnack.support@gmail.com</a></p>
