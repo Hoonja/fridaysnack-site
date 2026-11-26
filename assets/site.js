@@ -8,7 +8,7 @@
 // the page keeps its "Coming soon to the App Store" state.
 // Every element with data-appstore="<app id>" is upgraded to a real link.
 var APP_STORE_URLS = {
-  mocoder: '', // e.g. 'https://apps.apple.com/app/id0000000000'
+  mocoder: 'https://apps.apple.com/app/id6838301400',
 };
 
 (function () {

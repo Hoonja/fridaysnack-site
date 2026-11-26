@@ -59,7 +59,7 @@ The App Store URL lives in **one place**: `APP_STORE_URLS` at the top of
 
 ```js
 var APP_STORE_URLS = {
-  mocoder: '', // e.g. 'https://apps.apple.com/app/id0000000000'
+  mocoder: 'https://apps.apple.com/app/id6838301400', // live since 2026-11-26
 };
 ```
 
@@ -67,11 +67,12 @@ While the value is `''`, every element with `data-appstore="mocoder"` shows the
 "Coming soon to the App Store" state. Once it is set, the script swaps those
 elements for real "Download on the App Store" links.
 
-When the app is live, also:
-- change the `Coming soon` pill on the Mocoder card in `/index.html` to e.g.
-  `Available` / `출시`;
-- optionally hard-code the link in `mocoder/index.html` so it also works
-  without JS (replace the `<span class="store-btn store-btn--soon" …>` with an `<a class="store-btn" href="…">`).
+When an app goes live, also:
+- change its card's `Coming soon` pill in `/index.html` to an `<a class="pill">` link
+  (`On the App Store` / `App Store 출시`), as the Mocoder card does;
+- hard-code the link on the app page so it also works without JS
+  (`<a class="store-btn" href="…">`, as `mocoder/index.html` does);
+- bump the number in `.baked-count` ("Snacks baked so far") on `/index.html`.
 
 ## Adding a new app
 
