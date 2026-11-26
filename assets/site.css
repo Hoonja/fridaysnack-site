@@ -353,6 +353,22 @@ html:not([data-lang]) .lang-toggle { display: none; }
 .cookie-btn:active { transform: scale(0.94); transition-duration: 0.06s; }
 .cookie-btn.is-chomp { animation: chomp 0.28s var(--spring); }
 .cookie-btn.is-rebake { animation: rebake 0.6s var(--spring); }
+.cookie-btn.is-gone { animation: gone 0.45s ease-in forwards; }
+@keyframes gone {
+  to { transform: scale(0.3) rotate(25deg); opacity: 0; }
+}
+/* steam puffs over a freshly served snack (home.js) */
+.steam {
+  position: absolute;
+  z-index: 3;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid var(--outline);
+  pointer-events: none;
+  opacity: 0;
+}
 @keyframes chomp {
   0% { transform: scale(1); }
   35% { transform: scale(0.9, 0.95) rotate(4deg); }
@@ -1185,3 +1201,60 @@ a.pill { text-decoration: none; }
 a.pill:hover, a.pill:focus-visible { transform: rotate(0deg); }
 .baked-count { margin: -4px 0 18px; font-weight: 700; color: var(--ink); }
 .baked-count b { font-family: var(--font-display); font-size: 1.35em; color: var(--ink); }
+
+/* ---------- order form (contact receipt) ---------- */
+.order-form { display: grid; gap: 8px; margin: 14px 0 4px; }
+.order-kind { border: 0; padding: 0; margin: 0 0 4px; display: flex; flex-wrap: wrap; gap: 6px; }
+.order-kind legend { font-weight: 700; margin-bottom: 6px; padding: 0; }
+.order-kind label { position: relative; }
+.order-kind input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.order-kind label > span {
+  display: inline-block;
+  border: 2px solid #2a1f1a;
+  border-radius: 999px;
+  padding: 1px 10px;
+  font-weight: 700;
+  background: #fffdf7;
+  transition: transform 0.2s var(--spring), background 0.2s;
+}
+.order-kind input:checked + span { background: #f5b82e; transform: rotate(-3deg); }
+.order-kind input:focus-visible + span { outline: 3px solid #2a6df4; outline-offset: 2px; }
+.order-field { font-weight: 700; margin-top: 4px; }
+.order-form textarea,
+.order-form input[type="email"] {
+  width: 100%;
+  box-sizing: border-box;
+  font: inherit;
+  color: #2a1f1a;
+  background: #fff8e6;
+  border: 2px dashed #2a1f1a;
+  border-radius: 8px;
+  padding: 8px 10px;
+  resize: vertical;
+}
+.order-form textarea:focus,
+.order-form input[type="email"]:focus { outline: 3px solid #2a6df4; outline-offset: 1px; border-style: solid; }
+.order-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.order-btn,
+.copy-mail {
+  font: inherit;
+  font-weight: 700;
+  color: #2a1f1a;
+  background: #f5b82e;
+  border: 2px solid #2a1f1a;
+  border-radius: 8px;
+  padding: 6px 14px;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 #2a1f1a;
+  transition: transform 0.15s var(--spring), box-shadow 0.15s;
+}
+.order-btn { justify-self: center; font-size: 1.05rem; margin-top: 6px; }
+.copy-mail { font-size: 0.85rem; padding: 2px 10px; box-shadow: 2px 2px 0 #2a1f1a; margin-top: 4px; }
+.order-btn:hover,
+.copy-mail:hover { background: #ffd66e; }
+.order-btn:active,
+.copy-mail:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 #2a1f1a; }
+.order-btn:disabled { opacity: 0.6; cursor: progress; }
+.order-status { text-align: center; font-weight: 700; min-height: 1.5em; }
+.order-status.is-error { color: #b42318; }
+.order-note { font-size: 0.8rem; text-align: center; }

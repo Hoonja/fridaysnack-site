@@ -24,6 +24,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;600;700&amp;family=Jua&amp;display=swap">
 <link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/order.js" defer></script>
 <script src="/assets/home.js" defer></script>
 </head>
 <body>
@@ -77,7 +78,7 @@
 
         <span class="bite-hint js-only" aria-hidden="true"><span class="l-en" lang="en">tap me!</span><span class="l-ko" lang="ko">한입 먹어봐!</span></span>
         <button class="cookie-btn" type="button" id="cookie" aria-describedby="bite-count">
-          <span class="visually-hidden"><span class="l-en" lang="en">Take a bite of the cookie</span><span class="l-ko" lang="ko">쿠키 한입 먹기</span></span>
+          <span class="visually-hidden snack-label"><span class="l-en" lang="en">Take a bite of the cookie</span><span class="l-ko" lang="ko">쿠키 한입 먹기</span></span>
           <svg viewBox="0 0 200 200" aria-hidden="true" focusable="false">
             <defs>
               <mask id="cookie-bites" maskUnits="userSpaceOnUse" x="-20" y="-20" width="240" height="240">
@@ -85,8 +86,12 @@
                 <g class="bite-holes" fill="#000"><circle cx="168" cy="32" r="30"/><circle cx="196" cy="74" r="18"/></g>
               </mask>
               <clipPath id="cookie-disc"><circle cx="100" cy="100" r="89.5"/></clipPath>
+              <clipPath id="donut-ring"><path clip-rule="evenodd" d="M100 10.5a89.5 89.5 0 1 0 .01 0ZM100 75.5a24.5 24.5 0 1 1-.01 0Z"/></clipPath>
+              <clipPath id="waffle-in"><circle cx="100" cy="100" r="76"/></clipPath>
             </defs>
             <g mask="url(#cookie-bites)">
+              <!-- Snack art. home.js swaps this group for the next snack (cookie → donut → waffle → rice cake). -->
+              <g class="snack-art">
               <circle cx="100" cy="100" r="86" fill="#f5b82e" stroke="currentColor" stroke-width="7"/>
               <circle cx="100" cy="100" r="66" fill="none" stroke="#e39d2a" stroke-width="4" stroke-dasharray="1 14" stroke-linecap="round"/>
               <path d="M44 70a62 62 0 0 1 34-34" fill="none" stroke="#fff3c4" stroke-width="7" stroke-linecap="round"/>
@@ -100,6 +105,7 @@
                 <circle cx="56" cy="112" r="5.5"/>
                 <circle cx="104" cy="56" r="4.5"/>
                 <circle cx="118" cy="160" r="4.5"/>
+              </g>
               </g>
               <g class="bite-rims" clip-path="url(#cookie-disc)" fill="none" stroke="currentColor" stroke-width="14"><circle cx="168" cy="32" r="30"/><circle cx="196" cy="74" r="18"/></g>
             </g>
@@ -202,9 +208,32 @@
           <hr>
           <p class="r-row r-total"><span><span class="l-en" lang="en">TOTAL</span><span class="l-ko" lang="ko">합계</span></span><span><span class="l-en" lang="en">FREE</span><span class="l-ko" lang="ko">무료</span></span></p>
           <hr>
-          <p class="l-en" lang="en">Questions, ideas, bug reports, or snack recommendations are all welcome. Send your order to:</p>
-          <p class="l-ko" lang="ko">질문, 아이디어, 버그 제보, 간식 추천까지 무엇이든 환영합니다. 주문은 여기로:</p>
+          <p class="l-en" lang="en">Questions, ideas, bug reports, or snack recommendations are all welcome. Write your order below.</p>
+          <p class="l-ko" lang="ko">질문, 아이디어, 버그 제보, 간식 추천까지 무엇이든 환영합니다. 아래에 주문서를 적어 주세요.</p>
+          <!-- Order form → /api/idea (Vercel function) → issue in a private GitHub repo. Works without JS too (303 back here). -->
+          <form class="order-form" id="order-form" method="post" action="/api/idea">
+            <fieldset class="order-kind">
+              <legend><span class="l-en" lang="en">Order type</span><span class="l-ko" lang="ko">주문 종류</span></legend>
+              <label><input type="radio" name="kind" value="idea" checked><span><span class="l-en" lang="en">Idea</span><span class="l-ko" lang="ko">아이디어</span></span></label>
+              <label><input type="radio" name="kind" value="question"><span><span class="l-en" lang="en">Question</span><span class="l-ko" lang="ko">질문</span></span></label>
+              <label><input type="radio" name="kind" value="bug"><span><span class="l-en" lang="en">Bug</span><span class="l-ko" lang="ko">버그</span></span></label>
+              <label><input type="radio" name="kind" value="snack"><span><span class="l-en" lang="en">Snack tip</span><span class="l-ko" lang="ko">간식 추천</span></span></label>
+            </fieldset>
+            <label class="order-field" for="order-message"><span class="l-en" lang="en">Your order</span><span class="l-ko" lang="ko">주문 내용</span></label>
+            <textarea id="order-message" name="message" rows="5" required minlength="5" maxlength="2000"></textarea>
+            <label class="order-field" for="order-contact"><span class="l-en" lang="en">Email, if you'd like a reply (optional)</span><span class="l-ko" lang="ko">답장받을 이메일 (선택)</span></label>
+            <input id="order-contact" name="contact" type="email" maxlength="200" autocomplete="email" inputmode="email">
+            <div class="order-hp" aria-hidden="true"><label>Website <input name="website" type="text" tabindex="-1" autocomplete="off"></label></div>
+            <input type="hidden" name="lang" value="en">
+            <input type="hidden" name="elapsed" value="0">
+            <button class="order-btn" type="submit"><span class="l-en" lang="en">Place order</span><span class="l-ko" lang="ko">주문하기</span></button>
+            <p class="order-status" id="order-status" role="status" aria-live="polite"></p>
+            <p class="order-note r-muted"><span class="l-en" lang="en">Your note goes to a private inbox that only the maker reads. Add an email only if you want a reply.</span><span class="l-ko" lang="ko">적어 주신 내용은 만든 사람만 보는 비공개 접수함으로 갑니다. 답장이 필요할 때만 이메일을 남겨 주세요.</span></p>
+          </form>
+          <hr>
+          <p class="r-center"><span class="l-en" lang="en">Prefer email?</span><span class="l-ko" lang="ko">이메일이 편하다면</span></p>
           <p class="r-mail"><a href="mailto:fsnack.support@gmail.com">fsnack.support@gmail.com</a></p>
+          <p class="r-center js-only"><button class="copy-mail" type="button" data-copy="fsnack.support@gmail.com"><span class="l-en" lang="en">Copy address</span><span class="l-ko" lang="ko">주소 복사</span></button></p>
           <div class="barcode" aria-hidden="true"></div>
           <p class="r-center r-muted"><span class="l-en" lang="en">THANK YOU · COME AGAIN</span><span class="l-ko" lang="ko">감사합니다 · 또 오세요</span></p>
         </div>

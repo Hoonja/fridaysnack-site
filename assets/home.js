@@ -1,4 +1,4 @@
-// FridaySnack home page toys: bite-able cookie, floating snack parallax,
+// FridaySnack home page toys: bite-able snacks (they rotate), floating snack parallax,
 // Mocoder card wave, and the "next snack" oven timer.
 // One requestAnimationFrame loop for the whole page. It only runs while
 // something visible needs it and the tab is visible.
@@ -71,37 +71,103 @@
     return { ctx: ctx, w: r.width, h: r.height };
   }
 
-  // ---- 1. bite-able cookie ---------------------------------------------------
-  (function cookie() {
+  // ---- 1. bite-able snack: eat it, and a fresh one comes out of the oven ----
+  (function snack() {
     var btn = document.getElementById('cookie');
     var stage = document.querySelector('.cookie-stage');
     if (!btn || !stage) return;
     var NS = 'http://www.w3.org/2000/svg';
+    var art = btn.querySelector('.snack-art');
     var holes = btn.querySelector('.bite-holes');
     var rims = btn.querySelector('.bite-rims');
     var countBox = document.getElementById('bite-count');
+    var srLabel = btn.querySelector('.snack-label');
 
     // [angle (deg, 0 = right, clockwise), distance from centre, radius] in the
-    // 200x200 cookie. The bite already in the markup counts as bite 1.
+    // 200x200 snack. Nine bites finish any snack.
     var BITES = [
       [40, 96, 30], [140, 96, 31], [205, 94, 29], [275, 96, 28],
       [95, 90, 30], [-10, 66, 32], [178, 60, 34], [250, 40, 40], [60, 34, 44]
     ];
-    var bites = 1;
-    var busy = false;
 
-    var taps = 0; // how many times this visitor has bitten (just a toy, nothing is stored)
+    // Small seeded random so every batch of a snack looks the same.
+    function rng(seed) {
+      return function () { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
+    }
+    function pt(a, r) { return (100 + Math.cos(a) * r).toFixed(1) + ' ' + (100 + Math.sin(a) * r).toFixed(1); }
+    function wobblyRing(outer, inner, waves, amp) {
+      var d = '', i, a;
+      for (i = 0; i <= 72; i++) {
+        a = i / 72 * Math.PI * 2;
+        d += (i ? 'L' : 'M') + pt(a, outer + Math.sin(a * waves) * amp);
+      }
+      // inner hole as two half arcs (a single full-circle arc draws nothing)
+      return d + 'ZM' + pt(0, inner) + 'A' + inner + ' ' + inner + ' 0 1 0 ' + pt(Math.PI, inner) +
+        'A' + inner + ' ' + inner + ' 0 1 0 ' + pt(0, inner) + 'Z';
+    }
+    function donutArt() {
+      var r = rng(7), sprinkles = '', colors = ['#3b82f6', '#facc15', '#34d399', '#ffffff', '#a855f7'];
+      for (var i = 0; i < 18; i++) {
+        var a = i / 18 * Math.PI * 2 + r() * 0.25, d = 44 + r() * 20, t = a + 1.2 + r();
+        var x = 100 + Math.cos(a) * d, y = 100 + Math.sin(a) * d;
+        sprinkles += '<path d="M' + (x - Math.cos(t) * 4).toFixed(1) + ' ' + (y - Math.sin(t) * 4).toFixed(1) +
+          'L' + (x + Math.cos(t) * 4).toFixed(1) + ' ' + (y + Math.sin(t) * 4).toFixed(1) + '" stroke="' + colors[i % 5] + '"/>';
+      }
+      return '<path d="M100 14a86 86 0 1 0 .01 0ZM100 72a28 28 0 1 1-.01 0Z" fill="#e0a05a" fill-rule="evenodd" stroke="currentColor" stroke-width="7"/>' +
+        '<path d="' + wobblyRing(72, 34, 9, 4) + '" fill="#ff8fb1" fill-rule="evenodd" stroke="currentColor" stroke-width="4"/>' +
+        '<path d="M50 70a56 56 0 0 1 28-26" fill="none" stroke="#ffd0de" stroke-width="7" stroke-linecap="round"/>' +
+        '<g stroke-width="5" stroke-linecap="round">' + sprinkles + '</g>';
+    }
+    function waffleArt() {
+      var lines = '';
+      for (var v = 16; v <= 184; v += 26) {
+        lines += '<path d="M' + v + ' 10V190M10 ' + v + 'H190"/>';
+      }
+      return '<circle cx="100" cy="100" r="86" fill="#e9b24f" stroke="currentColor" stroke-width="7"/>' +
+        '<circle cx="100" cy="100" r="76" fill="#c98b2b"/>' +
+        '<g clip-path="url(#waffle-in)" stroke="#f0c063" stroke-width="10">' + lines + '</g>' +
+        '<path d="M64 52c10 8 4 20 14 28s22-2 30 8 0 24 12 30" fill="none" stroke="#8a4317" stroke-width="7" stroke-linecap="round" opacity="0.85"/>' +
+        '<rect x="84" y="84" width="34" height="28" rx="5" transform="rotate(-10 101 98)" fill="#fff1a8" stroke="currentColor" stroke-width="4"/>' +
+        '<path d="M90 92h14" stroke="#ffffff" stroke-width="4" stroke-linecap="round" transform="rotate(-10 101 98)"/>';
+    }
+    function riceCakeArt() {
+      var r = rng(11), grains = '';
+      for (var i = 0; i < 46; i++) {
+        var a = r() * Math.PI * 2, d = Math.sqrt(r()) * 70;
+        grains += '<ellipse cx="' + (100 + Math.cos(a) * d).toFixed(1) + '" cy="' + (100 + Math.sin(a) * d).toFixed(1) +
+          '" rx="6" ry="4" transform="rotate(' + Math.round(r() * 180) + ' ' + (100 + Math.cos(a) * d).toFixed(1) + ' ' +
+          (100 + Math.sin(a) * d).toFixed(1) + ')"/>';
+      }
+      return '<circle cx="100" cy="100" r="86" fill="#f6e7c1" stroke="currentColor" stroke-width="7"/>' +
+        '<circle cx="100" cy="100" r="72" fill="none" stroke="#e5cf98" stroke-width="4" stroke-dasharray="2 10" stroke-linecap="round"/>' +
+        '<g fill="#fffaf0" stroke="#e2c88d" stroke-width="1.6">' + grains + '</g>' +
+        '<path d="M44 70a62 62 0 0 1 34-34" fill="none" stroke="#ffffff" stroke-width="7" stroke-linecap="round"/>';
+    }
+
+    var SNACKS = [
+      { en: 'cookie', ko: '쿠키', emoji: '🍪', clip: 'cookie-disc', art: art.innerHTML,
+        crumbs: ['#d9962a', '#f5b82e', '#3b2414', '#e39d2a'] },
+      { en: 'donut', ko: '도넛', emoji: '🍩', clip: 'donut-ring', art: donutArt(),
+        crumbs: ['#ff8fb1', '#e0a05a', '#3b82f6', '#facc15'] },
+      { en: 'waffle', ko: '와플', emoji: '🧇', clip: 'cookie-disc', art: waffleArt(),
+        crumbs: ['#e9b24f', '#c98b2b', '#fff1a8', '#f0c063'] },
+      { en: 'rice cake', ko: '뻥튀기', emoji: '🍘', clip: 'cookie-disc', art: riceCakeArt(),
+        crumbs: ['#f6e7c1', '#fffaf0', '#e5cf98', '#f6e7c1'] }
+    ];
+    var current = 0;
+    var next = 0;  // index into BITES. The bite in the starting markup is decoration only.
+    var busy = false;
+    var taps = 0;  // bites this visit (just a toy, nothing is stored)
+
     function label(en, ko) {
       if (!countBox) return;
       countBox.querySelector('.l-en').innerHTML = en;
       countBox.querySelector('.l-ko').innerHTML = ko;
     }
-    function setCount(n, fresh) {
-      if (fresh) {
-        label('Fresh batch! Tap again 🍪', '새로 구웠어요! 또 먹어 봐요 🍪');
-        return;
-      }
-      label('Nom nom ×<b>' + taps + '</b>', '냠냠 ×<b>' + taps + '</b>');
+    function setSrLabel(s) {
+      if (!srLabel) return;
+      srLabel.querySelector('.l-en').textContent = 'Take a bite of the ' + s.en;
+      srLabel.querySelector('.l-ko').textContent = s.ko + ' 한입 먹기';
     }
     function circle(parent, cx, cy, r) {
       var c = document.createElementNS(NS, 'circle');
@@ -123,24 +189,26 @@
       });
       return { x: x, y: y };
     }
-    function crumbs(pt) {
-      if (reduced || !btn.animate) return;
+    function toStage(x, y) {
       var sr = stage.getBoundingClientRect();
       var br = btn.getBoundingClientRect();
       var scale = br.width / 200;
-      var ox = br.left - sr.left + pt.x * scale;
-      var oy = br.top - sr.top + pt.y * scale;
-      var colors = ['#d9962a', '#f5b82e', '#3b2414', '#e39d2a'];
+      return { x: br.left - sr.left + x * scale, y: br.top - sr.top + y * scale };
+    }
+    function crumbs(p) {
+      if (reduced || !btn.animate) return;
+      var o = toStage(p.x, p.y);
+      var colors = SNACKS[current].crumbs;
       for (var i = 0; i < 12; i++) {
         var s = document.createElement('span');
         s.className = 'crumb';
         s.setAttribute('aria-hidden', 'true');
         var size = 6 + Math.random() * 9;
-        s.style.cssText = 'left:' + ox + 'px;top:' + oy + 'px;width:' + size + 'px;height:' + size +
+        s.style.cssText = 'left:' + o.x + 'px;top:' + o.y + 'px;width:' + size + 'px;height:' + size +
           'px;background:' + colors[i % colors.length];
         stage.appendChild(s);
         var spin = (Math.random() - 0.5) * 2;
-        var dir = Math.atan2(pt.y - 100, pt.x - 100) + (Math.random() - 0.5) * 1.6;
+        var dir = Math.atan2(p.y - 100, p.x - 100) + (Math.random() - 0.5) * 1.6;
         var dist = 50 + Math.random() * 90;
         var dx = Math.cos(dir) * dist;
         var dy = Math.sin(dir) * dist;
@@ -152,34 +220,65 @@
         anim.onfinish = (function (el) { return function () { el.remove(); }; })(s);
       }
     }
+    function steam() {
+      if (reduced || !btn.animate) return;
+      for (var i = 0; i < 3; i++) {
+        var o = toStage(66 + i * 34, -6 + (i % 2) * 8);
+        var s = document.createElement('span');
+        s.className = 'steam';
+        s.setAttribute('aria-hidden', 'true');
+        s.style.left = o.x + 'px';
+        s.style.top = o.y + 'px';
+        stage.appendChild(s);
+        var anim = s.animate([
+          { transform: 'translate(-50%, 0) scale(0.4)', opacity: 0 },
+          { transform: 'translate(-50%, -22px) scale(1)', opacity: 0.9, offset: 0.35 },
+          { transform: 'translate(calc(-50% + ' + (i - 1) * 10 + 'px), -64px) scale(1.5)', opacity: 0 }
+        ], { duration: 1300, delay: 250 + i * 160, easing: 'ease-out', fill: 'backwards' });
+        anim.onfinish = (function (el) { return function () { el.remove(); }; })(s);
+      }
+    }
     function bump(cls) {
-      btn.classList.remove('is-chomp', 'is-rebake');
+      btn.classList.remove('is-chomp', 'is-rebake', 'is-gone');
       void btn.offsetWidth; // restart the CSS animation
       btn.classList.add(cls);
     }
+    function serve() {
+      current = (current + 1) % SNACKS.length;
+      var s = SNACKS[current];
+      art.innerHTML = s.art;
+      holes.innerHTML = '';
+      rims.innerHTML = '';
+      rims.setAttribute('clip-path', 'url(#' + s.clip + ')');
+      next = 0;
+      setSrLabel(s);
+      label('Fresh out of the oven: ' + s.en + '! ' + s.emoji,
+        '갓 구운 ' + s.ko + ' 나왔어요! ' + s.emoji);
+      bump('is-rebake');
+      steam();
+    }
+
+    // The starting cookie already shows one bite; start it clean when JS runs.
+    holes.innerHTML = '';
+    rims.innerHTML = '';
+    addBite([-40, 96, 30]);
 
     btn.addEventListener('click', function () {
       if (busy) return;
-      if (bites - 1 < BITES.length) {
-        var pt = addBite(BITES[bites - 1]);
-        bites++;
-        taps++;
-        setCount(bites);
-        bump('is-chomp');
-        crumbs(pt);
-      }
-      if (bites - 1 >= BITES.length) {
-        // All gone: re-bake a fresh one with a pop.
-        busy = true;
-        setTimeout(function () {
-          holes.innerHTML = '';
-          rims.innerHTML = '';
-          bites = 0;
-          setCount(0, true);
-          bump('is-rebake');
-          busy = false;
-        }, reduced ? 150 : 450);
-      }
+      var p = addBite(BITES[next]);
+      next++;
+      taps++;
+      label('Nom nom ×<b>' + taps + '</b>', '냠냠 ×<b>' + taps + '</b>');
+      bump('is-chomp');
+      crumbs(p);
+      if (next < BITES.length) return;
+      // All gone: a short pause on the empty plate, then the next snack.
+      busy = true;
+      setTimeout(function () { bump('is-gone'); }, reduced ? 0 : 250);
+      setTimeout(function () {
+        serve();
+        busy = false;
+      }, reduced ? 150 : 700);
     });
   })();
 
