@@ -43,7 +43,7 @@
         var btn = form.querySelector('.order-btn');
         btn.disabled = true;
         say(status, 'sending');
-        fetch('/api/idea', {
+        fetch('/api/idea/', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data)

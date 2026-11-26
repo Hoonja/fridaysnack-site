@@ -211,7 +211,7 @@
           <p class="l-en" lang="en">Questions, ideas, bug reports, or snack recommendations are all welcome. Write your order below.</p>
           <p class="l-ko" lang="ko">질문, 아이디어, 버그 제보, 간식 추천까지 무엇이든 환영합니다. 아래에 주문서를 적어 주세요.</p>
           <!-- Order form → /api/idea (Vercel function) → issue in a private GitHub repo. Works without JS too (303 back here). -->
-          <form class="order-form" id="order-form" method="post" action="/api/idea">
+          <form class="order-form" id="order-form" method="post" action="/api/idea/">
             <fieldset class="order-kind">
               <legend><span class="l-en" lang="en">Order type</span><span class="l-ko" lang="ko">주문 종류</span></legend>
               <label><input type="radio" name="kind" value="idea" checked><span><span class="l-en" lang="en">Idea</span><span class="l-ko" lang="ko">아이디어</span></span></label>
